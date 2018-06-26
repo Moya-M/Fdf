@@ -6,17 +6,17 @@
 #    By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/01/26 19:06:36 by mmoya        #+#   ##    ##    #+#        #
-#    Updated: 2018/06/20 15:06:43 by mmoya       ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/25 21:29:07 by mmoya       ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = fdf
 SRCPATH = ./srcs/
-SRCS = main.c init.c
+SRCS = main.c init.c parse.c
 OBJ = $(SRCS:.c=.o)
 HEAD = -I ./includes/
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 LIBPATH = ./libft/
 MLXPATH = ./minilibx/
 MLX = libmlx.a
