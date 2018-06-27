@@ -6,51 +6,29 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 18:03:45 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 04:40:02 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_map	*map_size(t_map *map)
+int		map_size(char *str)
 {
 	int		i;
+	int		w;
 
-	i = 0;/*
-	while (map->str[i])
+	i = 0;
+	w = 0;
+	while (str[i] == ' ')
+		i++;
+	while (str[i])
 	{
-		while (map->h == 0 && map->str[i])
-		{
-			dprintf(1, "%c\n", map->str[i]);
-			while (map->str[i] == ' ')
-				i++;
-			if (map->str[i] >= '0' && map->str[i] <= '9')
-				map->w++;
-			while (map->str[i] >= '0' && map->str[i] <= '9')
-				i++;
-			i++;
-		}
-		map->h++;
-	}
-	dprintf(1, "h %i w %i", map->h, map->w);*/
-	
-	while (map->str[i])
-	{/*
-		while (map->str[i] == ' ')
-			i++;
-		if ((map->str[i] >= '0' && map->str[i] <= '9') || map->str[i] == '-' || map->str[i] == '+')
-			map->w++;
-		while ((map->str[i] >= '0' && map->str[i] <= '9') || map->str[i] == '-' || map->str[i] == '+')
-			i++;
-		if (map->str[i] == '\n')
-			map->h++;*/
+		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
+			w++;
 		i++;
 	}
-	//map->w /= map->h;
-	map->w = 21;
-	dprintf(1, "h %i w %i", map->h, map->w);
-	return (map);
+	return (w);
 }
 
 t_map	*map_alloc(t_map *map)
@@ -58,10 +36,11 @@ t_map	*map_alloc(t_map *map)
 	int i;
 
 	i = 0;
-	map->map = malloc(sizeof(int*) * map->h + 1);
-	while (i < map->h)
+	map->map = malloc(sizeof(int*) * (map->h + 1));
+	while (i < map->h + 1)
 	{
-		map->map[i] = malloc(sizeof(int) * map->w);
+		map->map[i] = malloc(sizeof(int) * (map->w + 1));
+		ft_bzero(map->map[i], map->w + 1);
 		i++;
 	}
 	return (map);
@@ -82,13 +61,15 @@ t_map	*map_init(char *str)
 		exit(-1);
 	while (get_next_line(fd, &line))
 	{
+		if (map->w == 0)
+			map->w = map_size(line);
 		tmp = map->str;
-		map->str = ft_strjoin(map->str, line);
+		map->str = ft_strjoin(ft_strjoin(map->str, ft_strdup(" ")), line);
 		if (ft_strlen(line) > 1)
 			map->h++;
 		ft_strdel(&tmp);
 	}
-	map = map_size(map);
+	//map = map_size(map);
 	map = map_alloc(map);
 	return (map);
 }
@@ -108,11 +89,11 @@ t_map	*map_parse(char *map)
 		y = 0;
 		while (y < out->w)
 		{
-			while (ft_isspace(out->str[i]))
+			while (ft_isspace(out->str[i]) && out->str[i])
 				i++;
 			out->map[x][y] = ft_atoi(out->str + i);
 			i++;
-			while (ft_isdigit(out->str[i]))
+			while (ft_isdigit(out->str[i]) && out->str[i])
 				i++;
 			y++;
 		}

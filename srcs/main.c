@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 16:11:27 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 04:53:44 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,11 @@ int		key_hook(int key, void *mlx)
 
 void line(int x0, int y0, int x1, int y1, t_img *img) {
  
+ int i = 25;
+  x0 = x0 * i + 200;
+  y0 = y0 * i + 200;
+  x1 = x1 * i + 200;
+  y1 = y1 * i + 200;
   int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
   int dy = abs(y1-y0), sy = y0<y1 ? 1 : -1; 
   int err = (dx>dy ? dx : -dy)/2, e2;
@@ -50,7 +55,6 @@ int		main(int ac, char **av)
 	t_mlx *mlx;
 
 	(void)ac;
-	(void)av;
 	mlx = init_win(1000, 1000);
 	img = init_img(mlx);
 	int x = 0;
@@ -62,21 +66,15 @@ int		main(int ac, char **av)
 		y = 0;
 		while (y < map->w)
 		{
-			//dprintf(1, "%i ", map->map[x][y]);
-			line(y*50, x*50, y*50+20, x*50+map->map[x][y]*5, img);
-			//image_set_pixel(img, y*50, (x*50) - (map->map[x][y]*5), 0x00FFFFFF);
+			if (y < map->w - 1)
+				line(y + x, x - map->map[x][y] / 2, y + 1 + x, x - map->map[x][y + 1] / 2, img);
+			if (x < map->h - 1)
+				line(y + x, x - map->map[x][y] / 2, y + 1 + x, x + 1 - map->map[x+1][y] / 2, img);
 			y++;
 		}
-		//dprintf(1, "\n");
 		x++;
 	}
-	/*
-	while (x++ < img->w)
-	{
-		while (y++ < img->h)
-			image_set_pixel(img, x, y, 0x00FFFFFF);
-		y = -1;
-	}*/
+
 	//mlx_key_hook(mlx->win, key_hook, NULL);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
 	//mlx_clear_window(mlx->mlx, mlx->win);
