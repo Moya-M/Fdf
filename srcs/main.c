@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 23:03:09 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 23:27:33 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,13 +23,10 @@ int		key_hook(int key, t_glo *glo)
 {
 	if (key == 53)
 		exit(0);
-	// ZOOM 69; DEZOOM 78
 	if (key == 69 || key == 78)
 	{
 		ft_bzero((glo->img)->data, glo->img->h * glo->img->w * 4);
-		//mlx_clear_window(mlx->mlx, mlx->win);
 		glo->off += (key == 69) ? 0.05 : -0.05;
-		dprintf(1, "%f\n", glo->off);
 		draw_fdf(glo->img, glo->map, glo->off);
 		mlx_clear_window(glo->mlx->mlx, glo->mlx->win);
 		mlx_put_image_to_window(glo->mlx->mlx, glo->mlx->win, glo->img->img, 0, 0);
