@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 04:40:02 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 22:12:47 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,10 +36,10 @@ t_map	*map_alloc(t_map *map)
 	int i;
 
 	i = 0;
-	map->map = malloc(sizeof(int*) * (map->h + 1));
+	map->map = malloc(sizeof(double*) * (map->h + 1));
 	while (i < map->h + 1)
 	{
-		map->map[i] = malloc(sizeof(int) * (map->w + 1));
+		map->map[i] = malloc(sizeof(double) * (map->w + 1));
 		ft_bzero(map->map[i], map->w + 1);
 		i++;
 	}

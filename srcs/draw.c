@@ -6,21 +6,12 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 19:44:58 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 23:05:37 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-int		key_hook(int key, void *mlx)
-{
-	(void)mlx;
-	if (key == 53)
-		exit(0);
-
-	return (0);
-}
 
 void	image_set_pixel(t_img *img, int x, int y, int color)
 {
@@ -33,11 +24,10 @@ void	draw_line(t_lin *line, t_img *img) {
  
 	int	e2;
 	int	dx = fabs((double)(line->x1 - line->x0));
-	int	sx = line->x0 < line->x1 ? 1 : -1;
 	int	dy = fabs((double)(line->y1 - line->y0));
 	int	sy = line->y0 < line->y1 ? 1 : -1; 
 	int	err = (dx>dy ? dx : -dy)/2;
-
+	dprintf(1, "%i\n", err);
 	while (42)
 	{
 		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF);
@@ -47,7 +37,7 @@ void	draw_line(t_lin *line, t_img *img) {
 		if (e2 >- dx)
 		{
 			err -= dy;
-			line->x0 += sx;
+			line->x0 += 1;
 		}
 		if (e2 < dy)
 		{
@@ -78,16 +68,14 @@ void draw_line(int x0, int y0, int x1, int y1, t_img *img) {
   }
 }*/
 
-int		draw_fdf(t_mlx *mlx, t_img *img, char *str)
+int		draw_fdf(t_img *img, t_map *map, double off)
 {
-	int		x;
+	double	x;
 	int		y;
-	t_map	*map;
 	t_lin	*line;
 
 	x = 0;
 	y = 0;
-	map = map_parse(str);
 	!(line = malloc(sizeof(t_lin))) ? exit(-1) : 0;
 	while (x < map->h)
 	{
@@ -95,26 +83,21 @@ int		draw_fdf(t_mlx *mlx, t_img *img, char *str)
 		while (y < map->w)
 		{
 			line->x0 = (y + x/2) * 20;
-			line->y0 = (x - map->map[x][y] / 5) * 20;
+			line->y0 = (x - map->map[(int)x][y] * off) * 20;
 			line->x1 = (y + 1 + x/2) * 20;
-			line->y1 = (x - map->map[x][y + 1] / 5) * 20;
+			line->y1 = (x - map->map[(int)x][y + 1] * off) * 20;
 			if (y < map->w - 1)
 				draw_line(line, img);
 			line->x0 = (y + x/2) * 20;
-			line->y0 = (x - map->map[x][y] / 5) * 20;
-			line->x1 = (y + 1 + x/2) * 20;
-			line->y1 = (x + 1 - map->map[x + 1][y] / 5) * 20;
+			line->y0 = (x - map->map[(int)x][y] * off) * 20;
+			line->x1 = (y + .5 + x/2) * 20;
+			line->y1 = (x + 1 - map->map[(int)x + 1][y] * off) * 20;
 			if (x < map->h - 1)
 				draw_line(line, img);
 			y++;
 		}
 		x++;
 	}
-
-	//mlx_key_hook(mlx->win, key_hook, NULL);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
-	//mlx_clear_window(mlx->mlx, mlx->win);
-	mlx_key_hook(mlx->win, key_hook, (void*)0);
-	mlx_loop(mlx->mlx);
+	free(line);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 18:32:06 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/27 22:17:58 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,7 @@ typedef struct	s_lin {
 
 typedef struct	s_map {
 	char		*str;
-	int			**map;
+	double		**map;
 	int			w;
 	int			h;
 }				t_map;
@@ -48,9 +48,16 @@ typedef struct	s_mlx {
 	int			h;
 }				t_mlx;
 
+typedef struct	s_glo {
+	t_img		*img;
+	t_mlx		*mlx;
+	t_map		*map;
+	double		off;
+}				t_glo;
+
 t_mlx			*init_win(int w, int h);
 t_img			*init_img(t_mlx *mlx);
 t_map			*map_parse(char *map);
-int				draw_fdf(t_mlx *mlx, t_img *img, char *str);
+int				draw_fdf(t_img *img, t_map *map, double off);
 
 #endif
