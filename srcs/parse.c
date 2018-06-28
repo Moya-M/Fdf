@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 22:12:47 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 16:17:41 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +69,6 @@ t_map	*map_init(char *str)
 			map->h++;
 		ft_strdel(&tmp);
 	}
-	//map = map_size(map);
 	map = map_alloc(map);
 	return (map);
 }
@@ -101,16 +100,3 @@ t_map	*map_parse(char *map)
 	}
 	return (out);
 }
-/*
-int main()
-{
-	int y = 0;
-	int x = 0;
-	map_size(" 5 2 3 \n5  2   3\n5 2 3\n5 2   3\n5  2 3\n5 2 3\n5 2    3\n", &x, &y);
-	while ()
-	{
-
-	}
-	dprintf(1, "x%i y%i\n", x, y);
-	return 0;
-}*/

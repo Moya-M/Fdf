@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/27 22:17:58 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 16:20:07 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,6 +32,11 @@ typedef struct	s_lin {
 	int			x1;
 	int			y0;
 	int			y1;
+	int			e2;
+	int			dx;
+	int			dy;
+	int			sy; 
+	int			err;
 }				t_lin;
 
 typedef struct	s_map {
