@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 16:17:41 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:53:38 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,11 +46,30 @@ t_map	*map_alloc(t_map *map)
 	return (map);
 }
 
+t_map	*map_read(int fd, t_map *map)
+{
+	char	*line;
+	char	*tmp;
+	char	*tmp2;
+
+	while (get_next_line(fd, &line))
+	{
+		if (map->w == 0)
+			map->w = map_size(line);
+		tmp = map->str;
+		tmp2 = ft_strjoin(map->str, " ");
+		map->str = ft_strjoin(tmp2, line);
+		if (ft_strlen(line) > 1)
+			map->h++;
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
+	}
+	return (map);
+}
+
 t_map	*map_init(char *str)
 {
 	t_map	*map;
-	char	*tmp;
-	char	*line;
 	int		fd;
 
 	(!(map = malloc(sizeof(t_map)))) ? exit(-1) : 0;
@@ -59,16 +78,7 @@ t_map	*map_init(char *str)
 	map->str = ft_strdup("");
 	if (!(fd = open(str, O_RDONLY)))
 		exit(-1);
-	while (get_next_line(fd, &line))
-	{
-		if (map->w == 0)
-			map->w = map_size(line);
-		tmp = map->str;
-		map->str = ft_strjoin(ft_strjoin(map->str, ft_strdup(" ")), line);
-		if (ft_strlen(line) > 1)
-			map->h++;
-		ft_strdel(&tmp);
-	}
+	map = map_read(fd, map);
 	map = map_alloc(map);
 	return (map);
 }
@@ -92,11 +102,12 @@ t_map	*map_parse(char *map)
 				i++;
 			out->map[x][y] = ft_atoi(out->str + i);
 			i++;
-			while (ft_isdigit(out->str[i]) && out->str[i])
+			while (!ft_isspace(out->str[i]) && out->str[i])
 				i++;
 			y++;
 		}
 		x++;
 	}
+	ft_strdel(&out->str);
 	return (out);
 }

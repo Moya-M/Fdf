@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:09:52 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:50:04 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ void	draw_line(t_lin *line, t_img *img)
 	line->dx = fabs((double)(line->x1 - line->x0));
 	line->dy = fabs((double)(line->y1 - line->y0));
 	line->sy = line->y0 < line->y1 ? 1 : -1; 
-	line->err = (line->dx > line->dy ? line->dx : -line->dy)/2;
+	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (42)
 	{
 		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF);
