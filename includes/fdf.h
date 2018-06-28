@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:09:14 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:41:21 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,9 @@
 # define MAPXY glo->map->map[(int)cord->x][cord->y]
 # define MAPXY1 glo->map->map[(int)cord->x][cord->y + 1]
 # define MAPX1Y glo->map->map[(int)cord->x + 1][cord->y]
+# define HINT1 "Press Escape or close the window to quit"
+# define HINT2 "Use arrow keys to move map"
+# define HINT3 "Use + and - to change elevation"
 
 typedef struct	s_img {
 	void		*img;
