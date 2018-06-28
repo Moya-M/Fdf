@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:04:40 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:09:52 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,16 +47,16 @@ void	draw_line(t_lin *line, t_img *img)
 
 void	draw_lines(t_glo *glo, t_lin *line, t_cor *cord)
 {
-	line->x0 = (cord->y + cord->x/2) * cord->z;
-	line->y0 = (cord->x - MAPXY * glo->off) * cord->z;
-	line->x1 = (cord->y + 1 + cord->x/2) * cord->z;
-	line->y1 = (cord->x - MAPXY1 * glo->off) * cord->z;
+	line->x0 = (cord->y + cord->x/2) * cord->z + glo->ox;
+	line->y0 = (cord->x - MAPXY * glo->off) * cord->z + glo->oy;
+	line->x1 = (cord->y + 1 + cord->x/2) * cord->z + glo->ox;
+	line->y1 = (cord->x - MAPXY1 * glo->off) * cord->z + glo->oy;
 	if (cord->y < glo->map->w - 1)
 		draw_line(line, glo->img);
-	line->x0 = (cord->y + cord->x/2) * cord->z;
-	line->y0 = (cord->x - MAPXY * glo->off) * cord->z;
-	line->x1 = (cord->y + .5 + cord->x/2) * cord->z;
-	line->y1 = (cord->x + 1 - MAPX1Y * glo->off) * cord->z;
+	line->x0 = (cord->y + cord->x/2) * cord->z + glo->ox;
+	line->y0 = (cord->x - MAPXY * glo->off) * cord->z + glo->oy;
+	line->x1 = (cord->y + .5 + cord->x/2) * cord->z + glo->ox;
+	line->y1 = (cord->x + 1 - MAPX1Y * glo->off) * cord->z + glo->oy;
 	if (cord->x < glo->map->h - 1)
 		draw_line(line, glo->img);
 }

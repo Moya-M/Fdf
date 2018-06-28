@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:02:32 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:09:14 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,8 @@ typedef struct	s_glo {
 	t_mlx		*mlx;
 	t_map		*map;
 	double		off;
+	double		ox;
+	double		oy;
 }				t_glo;
 
 t_mlx			*init_win(int w, int h);
