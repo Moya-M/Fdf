@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 15:23:53 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 16:44:28 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,7 @@ int		key_hook(int key, t_glo *glo)
 	{
 		ft_bzero((glo->img)->data, glo->img->h * glo->img->w * 4);
 		glo->off += (key == 69) ? 0.05 : -0.05;
-		draw_fdf(glo->img, glo->map, glo->off);
+		draw_fdf(glo);
 		mlx_clear_window(glo->mlx->mlx, glo->mlx->win);
 		mlx_put_image_to_window(glo->mlx->mlx, glo->mlx->win, glo->img->img, 0, 0);
 	}
@@ -46,7 +46,7 @@ int		main(int ac, char **av)
 	glo->img = init_img(glo->mlx);
 	ft_bzero(glo->img->data, glo->img->h * glo->img->w * 4);
 	glo->map = map_parse(av[1]);
-	draw_fdf(glo->img, glo->map, glo->off);
+	draw_fdf(glo);
 	mlx_put_image_to_window(glo->mlx->mlx, glo->mlx->win, glo->img->img, 0, 0);
 	mlx_hook(glo->mlx->win, 17, (1L << 17), close_page, glo);
 	mlx_hook(glo->mlx->win, 2, 0, key_hook, glo);

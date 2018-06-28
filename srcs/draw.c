@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 16:22:21 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/28 17:04:40 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,36 +45,40 @@ void	draw_line(t_lin *line, t_img *img)
 	}
 }
 
-int		draw_fdf(t_img *img, t_map *map, double off)
+void	draw_lines(t_glo *glo, t_lin *line, t_cor *cord)
 {
-	double	x;
-	int		y;
-	int		z;
+	line->x0 = (cord->y + cord->x/2) * cord->z;
+	line->y0 = (cord->x - MAPXY * glo->off) * cord->z;
+	line->x1 = (cord->y + 1 + cord->x/2) * cord->z;
+	line->y1 = (cord->x - MAPXY1 * glo->off) * cord->z;
+	if (cord->y < glo->map->w - 1)
+		draw_line(line, glo->img);
+	line->x0 = (cord->y + cord->x/2) * cord->z;
+	line->y0 = (cord->x - MAPXY * glo->off) * cord->z;
+	line->x1 = (cord->y + .5 + cord->x/2) * cord->z;
+	line->y1 = (cord->x + 1 - MAPX1Y * glo->off) * cord->z;
+	if (cord->x < glo->map->h - 1)
+		draw_line(line, glo->img);
+}
+
+int		draw_fdf(t_glo *glo)
+{
+	t_cor	*cord;
 	t_lin	*line;
 
-	x = 0;
-	z = 600 / ((map->w > map->h) ? map->w : map->h);
+	!(cord = malloc(sizeof(t_cor))) ? exit(-1) : 0;
 	!(line = malloc(sizeof(t_lin))) ? exit(-1) : 0;
-	while (x < map->h)
+	cord->x = 0;
+	cord->z = 600 / ((glo->map->w > glo->map->h) ? glo->map->w : glo->map->h);
+	while (cord->x < glo->map->h)
 	{
-		y = 0;
-		while (y < map->w)
+		cord->y = 0;
+		while (cord->y < glo->map->w)
 		{
-			line->x0 = (y + x/2) * z;
-			line->y0 = (x - map->map[(int)x][y] * off) * z;
-			line->x1 = (y + 1 + x/2) * z;
-			line->y1 = (x - map->map[(int)x][y + 1] * off) * z;
-			if (y < map->w - 1)
-				draw_line(line, img);
-			line->x0 = (y + x/2) * z;
-			line->y0 = (x - map->map[(int)x][y] * off) * z;
-			line->x1 = (y + .5 + x/2) * z;
-			line->y1 = (x + 1 - map->map[(int)x + 1][y] * off) * z;
-			if (x < map->h - 1)
-				draw_line(line, img);
-			y++;
+			draw_lines(glo, line, cord);
+			cord->y++;
 		}
-		x++;
+		cord->x++;
 	}
 	free(line);
 	return (0);
