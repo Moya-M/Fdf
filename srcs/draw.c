@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:50:04 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 23:34:39 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ void	image_set_pixel(t_img *img, int x, int y, int color)
 	img->data[x + y * img->w] = color;
 }
 
-void	draw_line(t_lin *line, t_img *img)
+void	draw_line(t_lin *line, t_img *img, double i)
 {
 	line->dx = fabs((double)(line->x1 - line->x0));
 	line->dy = fabs((double)(line->y1 - line->y0));
@@ -28,7 +28,8 @@ void	draw_line(t_lin *line, t_img *img)
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (42)
 	{
-		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF);
+		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF -
+		(((int)fabs(i) * 20) % 255) * 255);
 		if (line->x0 == line->x1 && line->y0 == line->y1)
 			break;
 		line->e2 = line->err;
@@ -52,13 +53,13 @@ void	draw_lines(t_glo *glo, t_lin *line, t_cor *cord)
 	line->x1 = (cord->y + 1 + cord->x/2) * cord->z + glo->ox;
 	line->y1 = (cord->x - MAPXY1 * glo->off) * cord->z + glo->oy;
 	if (cord->y < glo->map->w - 1)
-		draw_line(line, glo->img);
+		draw_line(line, glo->img, MAPXY);
 	line->x0 = (cord->y + cord->x/2) * cord->z + glo->ox;
 	line->y0 = (cord->x - MAPXY * glo->off) * cord->z + glo->oy;
 	line->x1 = (cord->y + .5 + cord->x/2) * cord->z + glo->ox;
 	line->y1 = (cord->x + 1 - MAPX1Y * glo->off) * cord->z + glo->oy;
 	if (cord->x < glo->map->h - 1)
-		draw_line(line, glo->img);
+		draw_line(line, glo->img, MAPXY);
 }
 
 int		draw_fdf(t_glo *glo)
@@ -69,7 +70,8 @@ int		draw_fdf(t_glo *glo)
 	!(cord = malloc(sizeof(t_cor))) ? exit(-1) : 0;
 	!(line = malloc(sizeof(t_lin))) ? exit(-1) : 0;
 	cord->x = 0;
-	cord->z = 600 / ((glo->map->w > glo->map->h) ? glo->map->w : glo->map->h);
+	cord->z = 600 / ((glo->map->w > glo->map->h) ? glo->map->w : glo->map->h)
+	* glo->z;
 	while (cord->x < glo->map->h)
 	{
 		cord->y = 0;

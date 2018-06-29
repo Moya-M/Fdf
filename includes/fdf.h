@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 17:41:21 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/29 23:30:01 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,6 +70,7 @@ typedef struct	s_glo {
 	t_img		*img;
 	t_mlx		*mlx;
 	t_map		*map;
+	int			z;
 	double		off;
 	double		ox;
 	double		oy;
@@ -79,5 +80,6 @@ t_mlx			*init_win(int w, int h);
 t_img			*init_img(t_mlx *mlx);
 t_map			*map_parse(char *map);
 int				draw_fdf(t_glo *glo);
+int				close_page(t_glo *glo);
 
 #endif
