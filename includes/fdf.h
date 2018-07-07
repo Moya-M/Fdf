@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 23:30:01 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 23:51:34 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,9 +20,9 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define MAPXY glo->map->map[(int)cord->x][cord->y]
-# define MAPXY1 glo->map->map[(int)cord->x][cord->y + 1]
-# define MAPX1Y glo->map->map[(int)cord->x + 1][cord->y]
+# define MAPXY glo->map->grid[(int)cord->x][cord->y]
+# define MAPXY1 glo->map->grid[(int)cord->x][cord->y + 1]
+# define MAPX1Y glo->map->grid[(int)cord->x + 1][cord->y]
 # define HINT1 "Press Escape or close the window to quit"
 # define HINT2 "Use arrow keys to move map"
 # define HINT3 "Use + and - to change elevation"
@@ -48,7 +48,7 @@ typedef struct	s_lin {
 
 typedef struct	s_map {
 	char		*str;
-	double		**map;
+	double		**grid;
 	int			w;
 	int			h;
 }				t_map;

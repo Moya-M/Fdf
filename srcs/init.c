@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/20 15:04:48 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/20 15:05:13 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 23:08:39 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,7 +20,7 @@ t_mlx	*init_win(int w, int h)
 	if ((r = malloc(sizeof(t_mlx))) == NULL)
 		exit(-1);
 	r->mlx = mlx_init();
-	r->win = mlx_new_window(r->mlx, w, h, "TEST");
+	r->win = mlx_new_window(r->mlx, w, h, "FDF");
 	r->w = w;
 	r->h = h;
 	return (r);

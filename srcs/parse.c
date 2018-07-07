@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/28 18:19:50 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/08 00:05:03 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,11 +36,12 @@ t_map	*map_alloc(t_map *map)
 	int i;
 
 	i = 0;
-	map->map = malloc(sizeof(double*) * (map->h + 1));
+	
+	map->grid = malloc(sizeof(double*) * (map->h + 1));
 	while (i < map->h + 1)
 	{
-		map->map[i] = malloc(sizeof(double) * (map->w + 1));
-		ft_bzero(map->map[i], map->w + 1);
+		map->grid[i] = malloc(sizeof(double) * (map->w + 1));
+		ft_bzero(map->grid[i], map->w + 1);
 		i++;
 	}
 	return (map);
@@ -61,6 +62,7 @@ t_map	*map_read(int fd, t_map *map)
 		map->str = ft_strjoin(tmp2, line);
 		if (ft_strlen(line) > 1)
 			map->h++;
+		ft_strdel(&line);
 		ft_strdel(&tmp);
 		ft_strdel(&tmp2);
 	}
@@ -100,7 +102,7 @@ t_map	*map_parse(char *map)
 		{
 			while (ft_isspace(out->str[i]) && out->str[i])
 				i++;
-			out->map[x][y] = ft_atoi(out->str + i);
+			out->grid[x][y] = ft_atoi(out->str + i);
 			i++;
 			while (!ft_isspace(out->str[i]) && out->str[i])
 				i++;

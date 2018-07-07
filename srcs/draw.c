@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/07 22:53:03 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 23:33:08 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,8 +28,9 @@ void	draw_line(t_lin *line, t_img *img, double i)
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (42)
 	{
-		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF -
+		image_set_pixel(img, line->x0, line->y0, 0x00FFFF00 -
 		(((int)fabs(i) * 20) % 255) * 255);
+		//dprintf(1, "%i\n", (((int)fabs(i) * 20) % 255) * 255);
 		if (line->x0 == line->x1 && line->y0 == line->y1)
 			break ;
 		line->e2 = line->err;
@@ -82,6 +83,7 @@ int		draw_fdf(t_glo *glo)
 		}
 		cord->x++;
 	}
+	free(cord);
 	free(line);
 	return (0);
 }

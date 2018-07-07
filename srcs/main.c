@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/07 22:54:11 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 23:44:27 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 int		close_page(t_glo *glo)
 {
-	(void)glo;
+	free(glo);
 	exit(1);
 }
 
@@ -31,7 +31,7 @@ int		key_hook(int key, t_glo *glo)
 	if (key == 116 || key == 121)
 		glo->z += (key == 116) ? 1 : -1;
 	if (key == 53)
-		exit(0);
+		close_page(0);
 	if (key == 123 || key == 124)
 		glo->ox -= (key == 123) ? 5 : -5;
 	if (key == 125 || key == 126)
@@ -58,7 +58,7 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		exit(-1);
 	glo = malloc(sizeof(t_glo));
-	glo->off = 1;
+	glo->off = .20;
 	glo->z = 1;
 	glo->ox = 100;
 	glo->oy = 250;
