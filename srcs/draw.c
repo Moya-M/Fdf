@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/27 16:37:34 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 23:34:39 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 22:53:03 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,16 +24,16 @@ void	draw_line(t_lin *line, t_img *img, double i)
 {
 	line->dx = fabs((double)(line->x1 - line->x0));
 	line->dy = fabs((double)(line->y1 - line->y0));
-	line->sy = line->y0 < line->y1 ? 1 : -1; 
+	line->sy = line->y0 < line->y1 ? 1 : -1;
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (42)
 	{
 		image_set_pixel(img, line->x0, line->y0, 0x00FFFFFF -
 		(((int)fabs(i) * 20) % 255) * 255);
 		if (line->x0 == line->x1 && line->y0 == line->y1)
-			break;
+			break ;
 		line->e2 = line->err;
-		if (line->e2 >- line->dx)
+		if (line->e2 > -line->dx)
 		{
 			line->err -= line->dy;
 			line->x0 += 1;
@@ -48,15 +48,15 @@ void	draw_line(t_lin *line, t_img *img, double i)
 
 void	draw_lines(t_glo *glo, t_lin *line, t_cor *cord)
 {
-	line->x0 = (cord->y + cord->x/2) * cord->z + glo->ox;
+	line->x0 = (cord->y + cord->x / 2) * cord->z + glo->ox;
 	line->y0 = (cord->x - MAPXY * glo->off) * cord->z + glo->oy;
-	line->x1 = (cord->y + 1 + cord->x/2) * cord->z + glo->ox;
+	line->x1 = (cord->y + 1 + cord->x / 2) * cord->z + glo->ox;
 	line->y1 = (cord->x - MAPXY1 * glo->off) * cord->z + glo->oy;
 	if (cord->y < glo->map->w - 1)
 		draw_line(line, glo->img, MAPXY);
-	line->x0 = (cord->y + cord->x/2) * cord->z + glo->ox;
+	line->x0 = (cord->y + cord->x / 2) * cord->z + glo->ox;
 	line->y0 = (cord->x - MAPXY * glo->off) * cord->z + glo->oy;
-	line->x1 = (cord->y + .5 + cord->x/2) * cord->z + glo->ox;
+	line->x1 = (cord->y + .5 + cord->x / 2) * cord->z + glo->ox;
 	line->y1 = (cord->x + 1 - MAPX1Y * glo->off) * cord->z + glo->oy;
 	if (cord->x < glo->map->h - 1)
 		draw_line(line, glo->img, MAPXY);

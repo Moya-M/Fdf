@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/29 23:37:07 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/07 22:54:11 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ void	draw_hint(t_glo *glo)
 int		key_hook(int key, t_glo *glo)
 {
 	if (key == 116 || key == 121)
-		glo->z += (key == 116) ? 1: -1;
+		glo->z += (key == 116) ? 1 : -1;
 	if (key == 53)
 		exit(0);
 	if (key == 123 || key == 124)
@@ -44,7 +44,8 @@ int		key_hook(int key, t_glo *glo)
 		ft_bzero((glo->img)->data, glo->img->h * glo->img->w * 4);
 		draw_fdf(glo);
 		mlx_clear_window(glo->mlx->mlx, glo->mlx->win);
-		mlx_put_image_to_window(glo->mlx->mlx, glo->mlx->win, glo->img->img, 0, 0);
+		mlx_put_image_to_window(glo->mlx->mlx, glo->mlx->win,
+		glo->img->img, 0, 0);
 		draw_hint(glo);
 	}
 	return (0);
