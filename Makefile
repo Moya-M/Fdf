@@ -6,7 +6,7 @@
 #    By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/01/26 19:06:36 by mmoya        #+#   ##    ##    #+#        #
-#    Updated: 2018/07/07 22:57:33 by mmoya       ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/09 16:14:45 by mmoya       ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -16,7 +16,7 @@ SRCPATH = ./srcs/
 SRCS = main.c init.c parse.c draw.c
 OBJ = $(SRCS:.c=.o)
 HEAD = -I ./includes/
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 LIBPATH = ./libft/
 MLXPATH = ./minilibx/
 MLX = libmlx.a
