@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:34:04 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/07 23:51:34 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/09 18:23:05 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,6 +26,7 @@
 # define HINT1 "Press Escape or close the window to quit"
 # define HINT2 "Use arrow keys to move map"
 # define HINT3 "Use + and - to change elevation"
+# define HINT4 "Use * to enable colors"
 
 typedef struct	s_img {
 	void		*img;
@@ -71,6 +72,7 @@ typedef struct	s_glo {
 	t_mlx		*mlx;
 	t_map		*map;
 	int			z;
+	int			col;
 	double		off;
 	double		ox;
 	double		oy;

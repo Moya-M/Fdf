@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/18 18:32:22 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/09 18:02:24 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/09 18:23:27 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@ void	draw_hint(t_glo *glo)
 	mlx_string_put(glo->mlx->mlx, glo->mlx->win, 50, 25, 0x00FFFFFF, HINT1);
 	mlx_string_put(glo->mlx->mlx, glo->mlx->win, 50, 50, 0x00FFFFFF, HINT2);
 	mlx_string_put(glo->mlx->mlx, glo->mlx->win, 50, 75, 0x00FFFFFF, HINT3);
+	mlx_string_put(glo->mlx->mlx, glo->mlx->win, 50, 100, 0x00FFFFFF, HINT4);
 }
 
 int		key_hook(int key, t_glo *glo)
@@ -32,6 +33,8 @@ int		key_hook(int key, t_glo *glo)
 		glo->z += (key == 116) ? 1 : -1;
 	if (key == 53)
 		close_page(0);
+	if (key == 67)
+		glo->col = (glo->col == 0) ? 1 : 0;
 	if (key == 123 || key == 124)
 		glo->ox -= (key == 123) ? 5 : -5;
 	if (key == 125 || key == 126)
@@ -39,7 +42,7 @@ int		key_hook(int key, t_glo *glo)
 	if (key == 69 || key == 78)
 		glo->off += (key == 69) ? 0.05 : -0.05;
 	if (key == 69 || key == 78 || key == 123 || key == 124 ||
-	key == 125 || key == 126 || key == 116 || key == 121)
+	key == 125 || key == 126 || key == 116 || key == 121 || key == 67)
 	{
 		ft_bzero((glo->img)->data, glo->img->h * glo->img->w * 4);
 		draw_fdf(glo);
@@ -59,6 +62,7 @@ int		main(int ac, char **av)
 		exit(-1);
 	glo = malloc(sizeof(t_glo));
 	glo->off = .20;
+	glo->col = 0;
 	glo->z = 1;
 	glo->ox = 100;
 	glo->oy = 250;
