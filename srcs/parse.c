@@ -6,7 +6,7 @@
 /*   By: mmoya <mmoya@student.le-101.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/25 16:23:01 by mmoya        #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/09 18:05:47 by mmoya       ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/10 15:49:26 by mmoya       ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,7 @@ t_map	*map_init(char *str)
 	map->h = 0;
 	map->w = 0;
 	!(map->str = ft_strdup("")) ? exit(-1) : 0;
-	if (!(fd = open(str, O_RDONLY)))
+	if ((fd = open(str, O_RDONLY)) == -1)
 		exit(-1);
 	map = map_read(fd, map);
 	map = map_alloc(map);
